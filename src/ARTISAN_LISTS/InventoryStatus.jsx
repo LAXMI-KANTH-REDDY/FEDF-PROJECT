@@ -16,6 +16,7 @@ import {
 import StorageIcon from '@mui/icons-material/Storage';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
+
 // Mock Data
 const mockInventory = [
   { id: 1, name: 'Kanjivaram Silk Saree', sku: 'KS-001', stock: 5, totalCapacity: 30, price: 12500, threshold: 10 },
@@ -41,7 +42,7 @@ const InventoryStatus = () => {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: primaryBrown }}>
+      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: "#45871cff" }}>
         <StorageIcon sx={{ mr: 1, verticalAlign: 'middle' }} /> Inventory Status Overview
       </Typography>
 
@@ -49,20 +50,20 @@ const InventoryStatus = () => {
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} sm={6}>
           <Paper elevation={6} sx={{ p: 3, borderRadius: 3, borderLeft: `5px solid ${lightBrown}`, bgcolor: '#fff8e1' }}>
-            <Typography variant="h6" color={primaryBrown} fontWeight="bold">
+            <Typography variant="h6" color="#c5992aff" fontWeight="bold">
               Total Stocked Items
             </Typography>
-            <Typography variant="h3" fontWeight="bold" color="#5d4037">
+            <Typography variant="h3" fontWeight="bold" color="#d7c447ff">
               {totalItems}
             </Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper elevation={6} sx={{ p: 3, borderRadius: 3, borderLeft: `5px solid #d32f2f`, bgcolor: '#ffebee' }}>
-            <Typography variant="h6" color="error" fontWeight="bold">
+          <Paper elevation={6} sx={{ p: 3, borderRadius: 3, borderLeft: `5px solid #b39c1dff`, bgcolor: '#ffebee' }}>
+            <Typography variant="h6" color="#da5757ff" fontWeight="bold">
               Low Stock Alerts
             </Typography>
-            <Typography variant="h3" fontWeight="bold" color="#c62828">
+            <Typography variant="h3" fontWeight="bold" color="#e11111ff">
               {lowStockItems}
             </Typography>
           </Paper>
@@ -71,9 +72,9 @@ const InventoryStatus = () => {
       
       {/* Inventory Table */}
       <Paper elevation={6} sx={{ borderRadius: 3, overflow: 'hidden' }}>
-        <TableContainer>
+        <TableContainer sx={{ maxWidth: '100%', width: '1200px' }}>
           <Table>
-            <TableHead sx={{ bgcolor: lightBrown }}>
+            <TableHead sx={{ bgcolor: "#10150fff"}}>
               <TableRow>
                 <TableCell sx={{ fontWeight: 'bold', color: 'white' }}>Product Name</TableCell>
                 <TableCell sx={{ fontWeight: 'bold', color: 'white' }}>SKU</TableCell>
@@ -89,42 +90,43 @@ const InventoryStatus = () => {
                 const progressValue = (item.stock / item.totalCapacity) * 100;
 
                 return (
-                  <TableRow 
-                    key={item.id} 
-                    hover 
-                    sx={{ 
+                  <TableRow
+                    key={item.id}
+                    hover
+                    sx={{
                       '&:nth-of-type(odd)': { backgroundColor: tableHeaderBg },
+                      color: '#0f0c01ff',
                       ...(status.color === 'warning' || status.color === 'error' ? { backgroundColor: '#ffebee !important' } : {})
                     }}
                   >
-                    <TableCell sx={{ color: '#5d4037', fontWeight: 'medium' }}>{item.name}</TableCell>
-                    <TableCell>{item.sku}</TableCell>
-                    <TableCell align="center" sx={{ fontWeight: 'bold' }}>{item.stock}</TableCell>
+                    <TableCell sx={{ color: 'inherit', fontWeight: 'medium' }}>{item.name}</TableCell>
+                    <TableCell sx={{ color: 'inherit' }}>{item.sku}</TableCell>
+                    <TableCell align="center" sx={{ fontWeight: 'bold', color: 'inherit' }}>{item.stock}</TableCell>
                     <TableCell>
-                        <LinearProgress 
-                            variant="determinate" 
-                            value={progressValue} 
-                            sx={{ 
-                                height: 8, 
+                        <LinearProgress
+                            variant="determinate"
+                            value={progressValue}
+                            sx={{
+                                height: 8,
                                 borderRadius: 5,
                                 bgcolor: '#e0e0e0',
                                 '& .MuiLinearProgress-bar': {
                                     bgcolor: status.color === 'error' || status.color === 'warning' ? '#d32f2f' : '#a1887f'
                                 }
-                            }} 
+                            }}
                         />
                         <Typography variant="caption" color="text.secondary">
                             {item.stock} / {item.totalCapacity} capacity
                         </Typography>
                     </TableCell>
-                    <TableCell align="center">{item.threshold}</TableCell>
+                    <TableCell align="center" sx={{ color: 'inherit' }}>{item.threshold}</TableCell>
                     <TableCell>
-                      <Chip 
-                        label={status.label} 
+                      <Chip
+                        label={status.label}
                         size="small"
                         icon={status.icon}
-                        color={status.color} 
-                        sx={{ fontWeight: 'bold', borderRadius: 1 }} 
+                        color={status.color}
+                        sx={{ fontWeight: 'bold', borderRadius: 1 }}
                       />
                     </TableCell>
                   </TableRow>

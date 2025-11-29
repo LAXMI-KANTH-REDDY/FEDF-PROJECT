@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Container,
@@ -21,21 +21,17 @@ const ExportReports = () => {
   const [reportType, setReportType] = React.useState('sales');
   const [format, setFormat] = React.useState('csv');
 
+  useEffect(() => {
+    document.body.style.background = 'linear-gradient(135deg, #fff8f3 60%, #f7e0c3 100%)';
+    return () => { document.body.style.background = ''; };
+  }, []);
+
   const handleDownload = () => {
     alert(`📊 Downloading ${reportType.toUpperCase()} report in ${format.toUpperCase()} format...`);
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        py: 6,
-        px: 3,
-        display: 'flex',
-        justifyContent: 'center',
-        background: 'linear-gradient(135deg, #f9f5ec 0%, #fff7e6 100%)',
-      }}
-    >
+    <Box sx={{ minHeight: '100vh', p: 3 }}>
       <Paper
         elevation={8}
         sx={{
@@ -50,7 +46,7 @@ const ExportReports = () => {
         {/* Header Section */}
         <Box
           sx={{
-            bgcolor: 'linear-gradient(90deg, #a1887f 0%, #8d6e63 100%)',
+            bgcolor: '#6e4b1f',
             color: 'white',
             p: 3,
             display: 'flex',
@@ -68,7 +64,7 @@ const ExportReports = () => {
         <Box sx={{ p: 5 }}>
           <Typography
             variant="subtitle1"
-            sx={{ mb: 3, color: '#5d4037', fontWeight: 500 }}
+            sx={{ mb: 3, color: '#000', fontWeight: 500 }}
           >
             Choose your desired report type and format to download insights.
           </Typography>
@@ -90,7 +86,7 @@ const ExportReports = () => {
                 <FormControl component="fieldset" fullWidth>
                   <FormLabel
                     component="legend"
-                    sx={{ color: '#5d4037', fontWeight: 600, mb: 1 }}
+                    sx={{ color: '#000', fontWeight: 600, mb: 1 }}
                   >
                     1️⃣ Select Report Type
                   </FormLabel>
@@ -156,7 +152,7 @@ const ExportReports = () => {
                 <FormControl component="fieldset" fullWidth>
                   <FormLabel
                     component="legend"
-                    sx={{ color: '#5d4037', fontWeight: 600, mb: 1 }}
+                    sx={{ color: '#000', fontWeight: 600, mb: 1 }}
                   >
                     2️⃣ Select File Format
                   </FormLabel>
@@ -212,10 +208,10 @@ const ExportReports = () => {
                   fontWeight: 'bold',
                   textTransform: 'none',
                   borderRadius: 3,
-                  bgcolor: '#8d6e63',
+                  bgcolor: '#6e4b1f',
                   boxShadow: '0 4px 12px rgba(141, 110, 99, 0.4)',
                   '&:hover': {
-                    bgcolor: '#5d4037',
+                    bgcolor: '#bfa14a',
                     boxShadow: '0 6px 16px rgba(93, 64, 55, 0.5)',
                   },
                 }}

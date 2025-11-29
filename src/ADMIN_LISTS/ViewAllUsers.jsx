@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Chip } from '@mui/material';
 import GroupIcon from '@mui/icons-material/Group';
 
@@ -20,15 +20,20 @@ const getStatusColor = (status) => {
 };
 
 const ViewAllUsers = () => {
+  useEffect(() => {
+    document.body.style.background = 'linear-gradient(135deg, #282920ff 60%, #ceab83ff 100%)';
+    return () => { document.body.style.background = ''; };
+  }, []);
+
   return (
-    <Box>
-      <Typography variant="h4" sx={{ mb: 3, fontWeight: 'bold', color: '#8d6e63' }}>
+    <Box sx={{ minHeight: '100vh', p: 3 }}>
+      <Typography variant="h4" sx={{ mb: 3, fontWeight: 'bold', color: '#aecc42ff' }}>
         <GroupIcon sx={{ mr: 1, verticalAlign: 'middle' }} /> View All Users
       </Typography>
-      
+
       {/* Thematic Paper Container with strong elevation and rounded corners */}
       <Paper elevation={6} sx={{ borderRadius: 3, overflow: 'hidden' }}>
-        <TableContainer>
+        <TableContainer sx={{ maxWidth: '100%', width: '1200px' }}>
           <Table>
             <TableHead sx={{ bgcolor: '#a1887f' }}>
               <TableRow>
@@ -40,29 +45,37 @@ const ViewAllUsers = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {mockUsers.map((user) => (
-                <TableRow key={user.id} hover sx={{ '&:nth-of-type(odd)': { backgroundColor: '#f5f5f5' } }}>
-                  <TableCell>{user.id}</TableCell>
-                  <TableCell>{user.name}</TableCell>
+              {mockUsers.map((user, index) => (
+                <TableRow
+                  key={user.id}
+                  hover
+                  sx={{
+                    backgroundColor: index % 2 === 0 ? '#000' : 'linear-gradient(135deg, #fff8f3 60%, #f7e0c3 100%)',
+                    color: '#f5e9c8',
+                    '&:hover': { backgroundColor: index % 2 === 0 ? '#333' : '#e0e0e0' }
+                  }}
+                >
+                  <TableCell sx={{ color: 'inherit' }}>{user.id}</TableCell>
+                  <TableCell sx={{ color: 'inherit' }}>{user.name}</TableCell>
                   <TableCell>
-                    <Chip 
-                      label={user.role} 
+                    <Chip
+                      label={user.role}
                       size="small"
-                      sx={{ 
-                        bgcolor: user.role === 'Admin' ? '#ffcc80' : '#d7ccc8', 
-                        color: '#5d4037', 
-                        fontWeight: 'medium' 
-                      }} 
+                      sx={{
+                        bgcolor: user.role === 'Admin' ? '#ffcc80' : '#d7ccc8',
+                        color: '#5d4037',
+                        fontWeight: 'medium'
+                      }}
                     />
                   </TableCell>
                   <TableCell>
-                    <Chip 
-                      label={user.status} 
+                    <Chip
+                      label={user.status}
                       size="small"
-                      sx={getStatusColor(user.status)} 
+                      sx={getStatusColor(user.status)}
                     />
                   </TableCell>
-                  <TableCell>{user.lastLogin}</TableCell>
+                  <TableCell sx={{ color: 'inherit' }}>{user.lastLogin}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

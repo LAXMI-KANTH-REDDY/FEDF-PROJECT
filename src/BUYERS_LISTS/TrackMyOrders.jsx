@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography, Paper, Stack, Chip } from "@mui/material";
 
 const TrackMyOrders = () => {
@@ -7,20 +7,18 @@ const TrackMyOrders = () => {
     { id: "ORD-1018", product: "Silk Dupatta", status: "Delivered", date: "02 Oct 2025" },
   ];
 
+  useEffect(() => {
+    document.body.style.background = 'linear-gradient(135deg, #282920ff 60%, #ceab83ff 100%)';
+  }, []);
+
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        background: "linear-gradient(to bottom, #fff8ee, #fde6cc)",
-        p: 6,
-      }}
-    >
+    <Box sx={{ minHeight: '100vh', p: 3 }}>
       <Typography
         variant="h4"
         align="center"
-        sx={{ fontFamily: "serif", fontWeight: 700, color: "#5b3a29", mb: 4 }}
+        sx={{ fontFamily: "serif", fontWeight: 700, color: "#298238ff", mb: 4 }}
       >
-        Track My Orders
+        <u>Track My Orders </u>
       </Typography>
 
       <Stack spacing={3} maxWidth="700px" mx="auto">
@@ -37,21 +35,25 @@ const TrackMyOrders = () => {
             }}
           >
             <Box>
-              <Typography variant="h6" sx={{ color: "#8b4513" }}>
+              <Typography variant="h6" sx={{ color: "#cea71aff" }}>
                 {order.product}
               </Typography>
-              <Typography variant="body2" sx={{ color: "gray" }}>
+              <Typography variant="body2" sx={{ color: "#e9d9a0ff" }}>
                 {order.date}
               </Typography>
             </Box>
             <Chip
               label={order.status}
               sx={{
-                fontWeight: 600,
+                fontWeight: 800,
                 bgcolor:
-                  order.status === "Delivered" ? "#d7f5d7" : "#ffe8a1",
+                  order.status === "Delivered" ? "#c7efc7ff" : "#503f0cff",
                 color:
-                  order.status === "Delivered" ? "#2e7d32" : "#7a5b00",
+                  order.status === "Delivered" ? "#0f7113ff" : "#b49e5cff",
+                  borderBlockStyle: 'solid',
+                  borderColor:
+                  order.status === "Delivered" ? "#52f332ff" : "#f6c42eff",
+                  borderWidth: '2px',
               }}
             />
           </Paper>

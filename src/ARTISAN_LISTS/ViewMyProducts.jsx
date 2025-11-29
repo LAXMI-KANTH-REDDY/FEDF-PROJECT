@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Chip, Button } from '@mui/material';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import EditIcon from '@mui/icons-material/Edit';
@@ -27,13 +27,13 @@ const ViewMyProducts = () => {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#8d6e63' }}>
+      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#4a8527ff' }}>
         <Inventory2Icon sx={{ mr: 1, verticalAlign: 'middle' }} /> My Product Listings
       </Typography>
       
       {/* Thematic Paper Container with strong elevation and rounded corners */}
       <Paper elevation={6} sx={{ borderRadius: 3, overflow: 'hidden' }}>
-        <TableContainer>
+        <TableContainer sx={{ maxWidth: '100%', width: '1200px' }}>
           <Table>
             <TableHead sx={{ bgcolor: '#a1887f' }}>
               <TableRow>
@@ -46,40 +46,42 @@ const ViewMyProducts = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {mockProducts.map((product) => (
-                <TableRow 
-                  key={product.id} 
-                  hover 
-                  sx={{ 
-                    '&:nth-of-type(odd)': { backgroundColor: '#f5f5f5' }
+              {mockProducts.map((product, index) => (
+                <TableRow
+                  key={product.id}
+                  hover
+                  sx={{
+                    backgroundColor: index % 2 === 0 ? '#000' : 'linear-gradient(135deg, #fff8f3 60%, #f7e0c3 100%)',
+                    color: '#f5e9c8',
+                    '&:hover': { backgroundColor: index % 2 === 0 ? '#333' : '#e0e0e0' }
                   }}
                 >
-                  <TableCell sx={{ color: '#5d4037', fontWeight: 'medium' }}>{product.name}</TableCell>
-                  <TableCell>{product.sku}</TableCell>
+                  <TableCell sx={{ color: 'inherit', fontWeight: 'medium' }}>{product.name}</TableCell>
+                  <TableCell sx={{ color: 'inherit' }}>{product.sku}</TableCell>
                   <TableCell align="center" sx={{ fontWeight: 'bold', color: product.stock <= 5 ? '#d32f2f' : '#388e3c' }}>
                     {product.stock}
                   </TableCell>
-                  <TableCell align="right">{product.price.toLocaleString('en-IN')}</TableCell>
+                  <TableCell align="right" sx={{ color: 'inherit' }}>{product.price.toLocaleString('en-IN')}</TableCell>
                   <TableCell>
-                    <Chip 
-                      label={product.status} 
+                    <Chip
+                      label={product.status}
                       size="small"
-                      sx={{ ...getStatusColor(product.status), fontWeight: 'bold', borderRadius: 1 }} 
+                      sx={{ ...getStatusColor(product.status), fontWeight: 'bold', borderRadius: 1 }}
                     />
                   </TableCell>
                   <TableCell align="center">
-                    <Button 
-                      size="small" 
-                      startIcon={<EditIcon />} 
+                    <Button
+                      size="small"
+                      startIcon={<EditIcon />}
                       onClick={() => handleEdit(product.id)}
-                      sx={{ color: '#a1887f', mr: 1 }}
+                      sx={{ color: '#f5e9c8', mr: 1 }}
                     >
                       Edit
                     </Button>
-                    <Button 
-                      size="small" 
-                      startIcon={<DeleteIcon />} 
-                      color="error" 
+                    <Button
+                      size="small"
+                      startIcon={<DeleteIcon />}
+                      color="error"
                       onClick={() => handleDelete(product.id)}
                     >
                       Delete

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { 
-  Box, 
-  Typography, 
-  Paper, 
-  TextField, 
-  Button, 
-  Grid, 
-  Select, 
-  MenuItem, 
-  FormControl, 
+import React, { useState, useEffect } from 'react';
+import {
+  Box,
+  Typography,
+  Paper,
+  TextField,
+  Button,
+  Grid,
+  Select,
+  MenuItem,
+  FormControl,
   InputLabel,
   TextareaAutosize,
   FormHelperText
@@ -39,6 +39,11 @@ const AddNewProduct = () => {
   const [formData, setFormData] = useState(initialFormState);
   const [errors, setErrors] = useState({});
   const primaryBrown = '#8d6e63';
+
+  useEffect(() => {
+    document.body.style.background = 'linear-gradient(135deg, #282920ff 60%, #ceab83ff 100%)';
+    return () => { document.body.style.background = ''; };
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,8 +86,8 @@ const AddNewProduct = () => {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: primaryBrown }}>
-        <AddCircleOutlineIcon sx={{ mr: 1, verticalAlign: 'middle' }} /> Add New Product Listing
+      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#7f952eff' }}>
+        <AddCircleOutlineIcon sx={{ mr: 1, verticalAlign: 'middle' }} />  <u>Add New Product Listing</u>
       </Typography>
 
       <Paper elevation={8} sx={{ p: 4, borderRadius: 3, maxWidth: 900, mx: 'auto' }}>
@@ -189,7 +194,7 @@ const AddNewProduct = () => {
                     width: '100%',
                     padding: '12px',
                     borderRadius: '8px',
-                    borderColor: errors.description ? '#d32f2f' : '#bdbdbd',
+                    borderColor: errors.description ? '#e8e6e6ff' : '#e4d2d2ff',
                     fontFamily: 'Roboto, sans-serif',
                     fontSize: '16px',
                     transition: 'border-color 0.3s',

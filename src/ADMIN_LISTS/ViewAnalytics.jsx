@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Grid, Card, CardContent, Paper } from '@mui/material';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import PeopleIcon from '@mui/icons-material/People';
@@ -14,21 +14,26 @@ const kpiData = [
 ];
 
 const ViewAnalytics = () => {
+  useEffect(() => {
+    document.body.style.background = 'linear-gradient(135deg, #282920ff 60%, #ceab83ff 100%)';
+    return () => { document.body.style.background = ''; };
+  }, []);
+
   return (
-    <Box>
-      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#8d6e63' }}>
+    <Box sx={{ minHeight: '100vh', p: 3 }}>
+      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#222' }}>
         <TrendingUpIcon sx={{ mr: 1, verticalAlign: 'middle' }} /> Global Platform Analytics
       </Typography>
-      
+
       <Grid container spacing={4} sx={{ mb: 4 }}>
         {kpiData.map((kpi) => (
           <Grid item xs={12} sm={6} md={3} key={kpi.title}>
             {/* Thematic KPI Card with high elevation */}
-            <Card 
-              elevation={6} 
-              sx={{ 
-                borderRadius: 3, 
-                backgroundColor: kpi.color, 
+            <Card
+              elevation={6}
+              sx={{
+                borderRadius: 3,
+                backgroundColor: kpi.color,
                 color: 'white',
                 minHeight: 120
               }}

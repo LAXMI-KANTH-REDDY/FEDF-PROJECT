@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Container,
@@ -52,21 +52,17 @@ const KPICard = ({ title, value, icon: Icon, color }) => (
 const PromotionAnalytics = () => {
   const [campaign, setCampaign] = React.useState('campaign-1');
 
+  useEffect(() => {
+    document.body.style.background = 'linear-gradient(135deg, #282920ff 60%, #ceab83ff 100%)';
+    return () => { document.body.style.background = ''; };
+  }, []);
+
   const handleChange = (event) => {
     setCampaign(event.target.value);
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        py: 6,
-        px: 3,
-        display: 'flex',
-        justifyContent: 'center',
-        background: 'linear-gradient(135deg, #f9f5ec 0%, #fff7e6 100%)',
-      }}
-    >
+    <Box sx={{ minHeight: '100vh', p: 3 }}>
       <Paper
         elevation={8}
         sx={{
@@ -81,7 +77,7 @@ const PromotionAnalytics = () => {
         {/* Header */}
         <Box
           sx={{
-            bgcolor: 'linear-gradient(90deg, #a1887f 0%, #8d6e63 100%)',
+            bgcolor: '#6e4b1f',
             color: 'white',
             p: 3,
             display: 'flex',

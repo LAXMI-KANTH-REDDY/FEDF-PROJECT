@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Select, MenuItem, Button } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 
@@ -13,8 +13,13 @@ const availableRoles = ["Admin", "Buyer", "Artisan", "Marketing Specialist"];
 const ManageUserRoles = () => {
   const [users, setUsers] = React.useState(mockUsers);
 
+  useEffect(() => {
+    document.body.style.background = 'linear-gradient(135deg, #282920ff 60%, #ceab83ff 100%)';
+    return () => { document.body.style.background = ''; };
+  }, []);
+
   const handleRoleChange = (userId, newRole) => {
-    setUsers(users.map(user => 
+    setUsers(users.map(user =>
       user.id === userId ? { ...user, currentRole: newRole } : user
     ));
   };
@@ -25,34 +30,35 @@ const ManageUserRoles = () => {
   };
 
   return (
-    <Box>
-      <Typography variant="h4" sx={{ mb: 3, fontWeight: 'bold', color: '#8d6e63' }}>
-        <PersonIcon sx={{ mr: 1, verticalAlign: 'middle' }} /> Manage User Roles
+    <Box sx={{ minHeight: '100vh', p: 5 }}>
+      <Typography variant="h3" sx={{ mb: 3, fontWeight: 'bold', color: '#aecc42ff' }}>
+        <PersonIcon sx={{ mr: 3, verticalAlign: 'middle',scale: '3.5',
+         }} /> Manage User Roles
       </Typography>
-      
+
       {/* Thematic Paper Container with strong elevation and background */}
       <Paper elevation={6} sx={{ borderRadius: 3, overflow: 'hidden', bgcolor: '#fbfbfb' }}>
-        <TableContainer>
+        <TableContainer sx={{ maxWidth: '100%', width: '1200px' }}>
           <Table>
-            <TableHead sx={{ bgcolor: '#a1887f' }}>
+            <TableHead sx={{ bgcolor: '#b3958aff' }}>
               <TableRow>
-                <TableCell sx={{ fontWeight: 'bold', color: 'white' }}>Name</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', color: 'white' }}>Email</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', color: 'white' }}>Current Role</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', color: 'white' }}>Change To</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', color: 'white' }}>Action</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', color: 'Black' }}>Name</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', color: 'Black' }}>Email</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', color: 'Black' }}>Current Role</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', color: 'Black' }}>Change To</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', color: 'Black' }}>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.map((user) => (
-                <TableRow key={user.id} hover sx={{ '&:nth-of-type(odd)': { backgroundColor: '#f5f5f5' } }}>
-                  <TableCell>{user.name}</TableCell>
-                  <TableCell>{user.email}</TableCell>
+              {users.map((user, index) => (
+                <TableRow key={user.id} hover sx={{  backgroundColor: '#4b4c3dff'  }}>
+                  <TableCell sx={{ color: '#aecc42ff' }}>{user.name}</TableCell>
+                  <TableCell sx={{ color: '#aecc42ff' }}>{user.email}</TableCell>
                   <TableCell>
-                    <Box sx={{ 
-                      display: 'inline-block', 
-                      p: 0.5, 
-                      borderRadius: 1, 
+                    <Box sx={{
+                      display: 'inline-block',
+                      p: 0.5,
+                      borderRadius: 1,
                       bgcolor: user.currentRole === 'Admin' ? '#ffecb3' : '#d7ccc8',
                       color: '#5d4037',
                       fontWeight: 'medium'
@@ -65,7 +71,7 @@ const ManageUserRoles = () => {
                       value={user.currentRole}
                       onChange={(e) => handleRoleChange(user.id, e.target.value)}
                       size="small"
-                      sx={{ minWidth: 150, bgcolor: 'white' }}
+                      sx={{ minWidth: 150, bgcolor: '#606333ff', }}
                     >
                       {availableRoles.map(role => (
                         <MenuItem key={role} value={role}>{role}</MenuItem>
@@ -73,10 +79,10 @@ const ManageUserRoles = () => {
                     </Select>
                   </TableCell>
                   <TableCell>
-                    <Button 
-                      variant="contained" 
+                    <Button
+                      variant="contained"
                       onClick={saveChanges}
-                      sx={{ bgcolor: '#8d6e63', '&:hover': { bgcolor: '#5d4037' }, borderRadius: 1.5, color: 'white' }}
+                      sx={{ bgcolor: '#6e4b1f', '&:hover': { bgcolor: '#bfa14a' }, borderRadius: 1.5, color: 'white' }}
                     >
                       Update
                     </Button>
@@ -87,13 +93,13 @@ const ManageUserRoles = () => {
           </Table>
         </TableContainer>
       </Paper>
-      
+
       <Box sx={{ mt: 4, textAlign: 'right' }}>
-        <Button 
-          variant="contained" 
+        <Button
+          variant="contained"
           size="large"
           onClick={saveChanges}
-          sx={{ bgcolor: '#a1887f', '&:hover': { bgcolor: '#8d6e63' }, borderRadius: 2 }}
+          sx={{ bgcolor: '#6e4b1f', '&:hover': { bgcolor: '#bfa14a' }, borderRadius: 2 }}
         >
           Save All Changes
         </Button>

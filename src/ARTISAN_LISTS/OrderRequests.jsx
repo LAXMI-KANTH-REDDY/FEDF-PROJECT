@@ -36,13 +36,13 @@ const OrderRequests = () => {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#8d6e63' }}>
-        <ShoppingBagIcon sx={{ mr: 1, verticalAlign: 'middle' }} /> New Order Requests
+      <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#419730ff' }}>
+        <ShoppingBagIcon sx={{ mr: 1, verticalAlign: 'middle' }} />   <u> New Order Requests</u>
       </Typography>
       
       {/* Thematic Paper Container with strong elevation and rounded corners */}
       <Paper elevation={6} sx={{ borderRadius: 3, overflow: 'hidden' }}>
-        <TableContainer>
+        <TableContainer sx={{ maxWidth: '100%', width: '1200px' }}>
           <Table>
             <TableHead sx={{ bgcolor: '#a1887f' }}>
               <TableRow>
@@ -59,47 +59,48 @@ const OrderRequests = () => {
               {orders.map((order) => {
                 const statusInfo = getStatusChip(order.status);
                 return (
-                  <TableRow 
-                    key={order.id} 
-                    hover 
-                    sx={{ 
-                      '&:nth-of-type(odd)': { backgroundColor: '#f5f5f5' }
+                  <TableRow
+                    key={order.id}
+                    hover
+                    sx={{
+                      '&:nth-of-type(odd)': { backgroundColor: '#0c210eff' },
+                      color: '#f5e9c8'
                     }}
                   >
-                    <TableCell sx={{ color: '#5d4037', fontWeight: 'medium' }}>{order.id}</TableCell>
-                    <TableCell>{order.product}</TableCell>
-                    <TableCell>{order.quantity}</TableCell>
-                    <TableCell>{order.buyer}</TableCell>
-                    <TableCell>{order.date}</TableCell>
+                    <TableCell sx={{ color: 'inherit', fontWeight: 'medium' }}>{order.id}</TableCell>
+                    <TableCell sx={{ color: 'inherit' }}>{order.product}</TableCell>
+                    <TableCell sx={{ color: 'inherit' }}>{order.quantity}</TableCell>
+                    <TableCell sx={{ color: 'inherit' }}>{order.buyer}</TableCell>
+                    <TableCell sx={{ color: 'inherit' }}>{order.date}</TableCell>
                     <TableCell>
-                      <Chip 
-                        label={statusInfo.label} 
+                      <Chip
+                        label={statusInfo.label}
                         size="small"
-                        sx={{ bgcolor: statusInfo.bgcolor, color: statusInfo.color, fontWeight: 'bold', borderRadius: 1 }} 
+                        sx={{ bgcolor: statusInfo.bgcolor, color: statusInfo.color, fontWeight: 'bold', borderRadius: 1 }}
                       />
                     </TableCell>
                     <TableCell align="center">
                       {order.status === 'New Order' ? (
                         <>
-                          <Button 
-                            size="small" 
+                          <Button
+                            size="small"
                             variant="contained"
                             startIcon={<CheckCircleIcon />}
-                            sx={{ 
-                              bgcolor: '#a1887f', 
-                              '&:hover': { bgcolor: '#8d6e63' }, 
-                              color: 'white', 
-                              mr: 1 
+                            sx={{
+                              bgcolor: '#a1887f',
+                              '&:hover': { bgcolor: '#8d6e63' },
+                              color: 'white',
+                              mr: 1
                             }}
                             onClick={() => handleAction(order.id, 'Accepted')}
                           >
                             Accept
                           </Button>
-                          <Button 
-                            size="small" 
+                          <Button
+                            size="small"
                             variant="outlined"
                             startIcon={<BlockIcon />}
-                            color="error" 
+                            color="error"
                             onClick={() => handleAction(order.id, 'Rejected')}
                           >
                             Reject
